@@ -1,0 +1,27 @@
+{%- comment -%}
+  Turns the global theme settings (config/settings_schema.json) into CSS
+  custom properties. theme.css consumes these — change colors and fonts
+  in the theme settings, not in the stylesheet.
+{%- endcomment -%}
+
+{% style %}
+  {{ settings.font_heading | font_face: font_display: 'swap' }}
+  {{ settings.font_body | font_face: font_display: 'swap' }}
+
+  :root {
+    --color-background: {{ settings.color_background }};
+    --color-text: {{ settings.color_text }};
+    --color-accent: {{ settings.color_accent }};
+    --color-border: {{ settings.color_border }};
+
+    --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+    --font-heading-weight: {{ settings.font_heading.weight }};
+    --font-heading-style: {{ settings.font_heading.style }};
+
+    --font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+    --font-body-weight: {{ settings.font_body.weight }};
+    --font-body-style: {{ settings.font_body.style }};
+
+    --page-width: {{ settings.page_width }}px;
+  }
+{% endstyle %}

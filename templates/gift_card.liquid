@@ -1,0 +1,38 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ shop.locale }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ 'gift_cards.title' | t }} &ndash; {{ shop.name }}</title>
+    <meta name="robots" content="noindex">
+    {% render 'css-variables' %}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+
+  <body class="gift-card-page">
+    <main class="gift-card">
+      <p class="gift-card__shop">{{ shop.name }}</p>
+      <h1 class="gift-card__title">{{ 'gift_cards.greeting' | t: shop: shop.name }}</h1>
+
+      <div class="gift-card__panel">
+        <p class="gift-card__label">{{ 'gift_cards.balance' | t }}</p>
+        <p class="gift-card__balance">{{ gift_card.balance | money }}</p>
+
+        <p class="gift-card__label">{{ 'gift_cards.code_label' | t }}</p>
+        <p class="gift-card__code">{{ gift_card.code | format_code }}</p>
+
+        {%- if gift_card.expired -%}
+          <p class="gift-card__expired">{{ 'gift_cards.expired' | t }}</p>
+        {%- else -%}
+          <p class="gift-card__note">{{ 'gift_cards.redeem' | t }}</p>
+        {%- endif -%}
+      </div>
+
+      <a href="{{ shop.url }}" class="button button--primary">
+        {{ 'gift_cards.shop_link' | t }}
+      </a>
+    </main>
+  </body>
+</html>

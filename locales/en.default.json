@@ -1,0 +1,82 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content"
+    },
+    "navigation": {
+      "menu": "Menu",
+      "search": "Search",
+      "cart": "Cart"
+    },
+    "404": {
+      "title": "Page not found",
+      "message": "The page you were looking for doesn't exist. It may have moved, or the link might be out of date.",
+      "back_home": "Back to the homepage"
+    },
+    "password": {
+      "opening_soon": "Opening soon",
+      "message": "We're putting the finishing touches on our store. Check back shortly.",
+      "password_label": "Store password",
+      "enter": "Enter store",
+      "powered_by": "This store will be powered by Shopify"
+    },
+    "continue_shopping": "Continue shopping"
+  },
+  "products": {
+    "add_to_cart": "Add to cart",
+    "sold_out": "Sold out",
+    "quantity": "Quantity",
+    "variant_label": "Options",
+    "from_price": "From {{ price }}",
+    "on_sale": "Sale",
+    "regular_price": "Regular price",
+    "sale_price": "Sale price",
+    "view_all": "View all",
+    "no_products": "No products yet",
+    "placeholder_title": "Example product"
+  },
+  "collections": {
+    "title": "Collections",
+    "empty": "There are no products in this collection yet.",
+    "products_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    }
+  },
+  "cart": {
+    "title": "Your cart",
+    "empty": "Your cart is empty.",
+    "item": "Item",
+    "quantity": "Quantity",
+    "total": "Total",
+    "remove": "Remove",
+    "update": "Update cart",
+    "subtotal": "Subtotal",
+    "taxes_note": "Taxes and shipping are calculated at checkout.",
+    "checkout": "Check out"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search the store",
+    "submit": "Search",
+    "results_count": {
+      "one": "{{ count }} result for \"{{ terms }}\"",
+      "other": "{{ count }} results for \"{{ terms }}\""
+    },
+    "no_results": "No results for \"{{ terms }}\". Try a different search."
+  },
+  "blog": {
+    "read_more": "Read more",
+    "empty": "No posts yet — check back soon.",
+    "back_to_blog": "Back to {{ title }}"
+  },
+  "gift_cards": {
+    "title": "Gift card",
+    "greeting": "Here's your {{ shop }} gift card",
+    "balance": "Current balance",
+    "code_label": "Gift card code",
+    "redeem": "Enter this code at checkout to use your gift card.",
+    "expired": "This gift card has expired.",
+    "shop_link": "Start shopping"
+  }
+}

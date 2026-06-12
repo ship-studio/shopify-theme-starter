@@ -1,0 +1,29 @@
+{%- comment -%}
+  Renders the price for a product, handling sale and "from" states.
+
+  Usage: {% render 'price', price_product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  assign on_sale = false
+  if price_product.compare_at_price > price_product.price
+    assign on_sale = true
+  endif
+-%}
+
+<span class="price{% if on_sale %} price--on-sale{% endif %}">
+  {%- if price_product.price_varies -%}
+    {%- assign min_price = price_product.price_min | money -%}
+    {{ 'products.from_price' | t: price: min_price }}
+  {%- elsif on_sale -%}
+    <span class="visually-hidden">{{ 'products.sale_price' | t }}</span>
+    <span class="price__current">{{ price_product.price | money }}</span>
+    <s class="price__compare">
+      <span class="visually-hidden">{{ 'products.regular_price' | t }}</span>
+      {{- price_product.compare_at_price | money -}}
+    </s>
+    <span class="price__badge">{{ 'products.on_sale' | t }}</span>
+  {%- else -%}
+    <span class="price__current">{{ price_product.price | money }}</span>
+  {%- endif -%}
+</span>

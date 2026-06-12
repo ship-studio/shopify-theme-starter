@@ -1,0 +1,39 @@
+<article class="article">
+  <div class="container container--narrow">
+    <header class="page-header">
+      <p class="article__date">{{ article.published_at | date: '%B %-d, %Y' }}</p>
+      <h1 class="page-header__title">{{ article.title }}</h1>
+    </header>
+
+    {%- if article.image -%}
+      <div class="article__media">
+        {{
+          article.image
+          | image_url: width: 1400
+          | image_tag:
+            widths: '700, 1000, 1400, 2000',
+            sizes: '(min-width: 750px) 720px, 100vw',
+            alt: article.image.alt,
+            class: 'article__image'
+        }}
+      </div>
+    {%- endif -%}
+
+    <div class="rte">
+      {{ article.content }}
+    </div>
+
+    <footer class="article__footer">
+      <a href="{{ blog.url }}" class="article__back">
+        {{ 'blog.back_to_blog' | t: title: blog.title }}
+      </a>
+    </footer>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

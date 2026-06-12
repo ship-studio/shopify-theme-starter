@@ -1,0 +1,45 @@
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__brand">
+      <p class="site-footer__name">{{ shop.name }}</p>
+      {%- if section.settings.text != blank -%}
+        <p class="site-footer__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- assign footer_menu = section.settings.menu | default: linklists.footer -%}
+    {%- if footer_menu.links.size > 0 -%}
+      <nav class="site-footer__nav">
+        <ul class="site-footer__list">
+          {%- for link in footer_menu.links -%}
+            <li><a href="{{ link.url }}" class="site-footer__link">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+  </div>
+
+  <div class="container site-footer__legal">
+    <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Footer text",
+      "info": "A short line about the store. Leave blank to hide."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Footer menu",
+      "default": "footer"
+    }
+  ]
+}
+{% endschema %}

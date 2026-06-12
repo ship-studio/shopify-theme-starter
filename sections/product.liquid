@@ -1,0 +1,108 @@
+<section class="product">
+  <div class="container product__inner">
+    <div class="product__gallery">
+      {%- if product.featured_image -%}
+        {{
+          product.featured_image
+          | image_url: width: 1200
+          | image_tag:
+            widths: '600, 900, 1200, 1600',
+            sizes: '(min-width: 750px) 50vw, 100vw',
+            alt: product.featured_image.alt,
+            class: 'product__image'
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'product__image-placeholder' }}
+      {%- endif -%}
+
+      {%- if product.images.size > 1 -%}
+        <div class="product__thumbnails">
+          {%- for image in product.images offset: 1 limit: 4 -%}
+            {{
+              image
+              | image_url: width: 300
+              | image_tag:
+                widths: '150, 300',
+                sizes: '150px',
+                alt: image.alt,
+                class: 'product__thumbnail',
+                loading: 'lazy'
+            }}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="product__details">
+      <h1 class="product__title">{{ product.title }}</h1>
+
+      <div class="product__price">
+        {% render 'price', price_product: product %}
+      </div>
+
+      {% form 'product', product, class: 'product__form' %}
+        {%- if product.has_only_default_variant -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {%- else -%}
+          <div class="product__field">
+            <label class="product__label" for="variant-select-{{ section.id }}">
+              {{ 'products.variant_label' | t }}
+            </label>
+            <select id="variant-select-{{ section.id }}" name="id" class="product__select">
+              {%- for variant in product.variants -%}
+                <option
+                  value="{{ variant.id }}"
+                  {% if variant.id == product.selected_or_first_available_variant.id %}selected{% endif %}
+                  {% unless variant.available %}disabled{% endunless %}
+                >
+                  {{ variant.title }}
+                  {%- unless variant.available %} — {{ 'products.sold_out' | t }}{% endunless %}
+                </option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endif -%}
+
+        <div class="product__field">
+          <label class="product__label" for="quantity-{{ section.id }}">
+            {{ 'products.quantity' | t }}
+          </label>
+          <input
+            type="number"
+            id="quantity-{{ section.id }}"
+            name="quantity"
+            value="1"
+            min="1"
+            class="product__quantity"
+          >
+        </div>
+
+        <button
+          type="submit"
+          name="add"
+          class="button button--primary button--block"
+          {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+        >
+          {%- if product.selected_or_first_available_variant.available -%}
+            {{ 'products.add_to_cart' | t }}
+          {%- else -%}
+            {{ 'products.sold_out' | t }}
+          {%- endif -%}
+        </button>
+      {% endform %}
+
+      {%- if product.description != blank -%}
+        <div class="product__description rte">
+          {{ product.description }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}

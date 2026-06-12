@@ -1,0 +1,40 @@
+{%- comment -%}
+  A single product card for grids (collections, featured collections, search).
+
+  Usage: {% render 'product-card', card_product: product %}
+{%- endcomment -%}
+
+{%- if card_product and card_product != blank -%}
+  <article class="product-card">
+    <a href="{{ card_product.url }}" class="product-card__link">
+      <div class="product-card__media">
+        {%- if card_product.featured_image -%}
+          {{
+            card_product.featured_image
+            | image_url: width: 600
+            | image_tag:
+              widths: '300, 450, 600, 900',
+              sizes: '(min-width: 750px) 25vw, 50vw',
+              alt: card_product.featured_image.alt,
+              class: 'product-card__image',
+              loading: 'lazy'
+          }}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder' }}
+        {%- endif -%}
+        {%- unless card_product.available -%}
+          <span class="product-card__badge">{{ 'products.sold_out' | t }}</span>
+        {%- endunless -%}
+      </div>
+      <h3 class="product-card__title">{{ card_product.title }}</h3>
+      {% render 'price', price_product: card_product %}
+    </a>
+  </article>
+{%- else -%}
+  <article class="product-card product-card--placeholder">
+    <div class="product-card__media">
+      {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder' }}
+    </div>
+    <h3 class="product-card__title">{{ 'products.placeholder_title' | t }}</h3>
+  </article>
+{%- endif -%}

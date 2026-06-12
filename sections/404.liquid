@@ -1,0 +1,16 @@
+<section class="not-found">
+  <div class="container container--narrow not-found__inner">
+    <h1 class="not-found__title">{{ 'general.404.title' | t }}</h1>
+    <p class="not-found__text">{{ 'general.404.message' | t }}</p>
+    <a href="{{ routes.root_url }}" class="button button--primary">
+      {{ 'general.404.back_home' | t }}
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}
