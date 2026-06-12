@@ -84,6 +84,7 @@ assets/      CSS, JS, images. theme.css is the stylesheet.
 ### DON'T:
 - Don't edit anything inside `.shopify/` — that folder is managed by the Shopify CLI
 - Don't run `shopify theme dev`, `shopify theme pull`, or other CLI commands for previewing — Ship Studio handles it
+- Don't create a `package.json` or npm dev script — Ship Studio launches the theme dev server natively (a `package.json` here makes Ship Studio demand an npm install that doesn't exist). If the preview won't start, tell the user to use the **Restart dev server** button instead of working around it with files
 - Don't hardcode store content (product names, prices) — it comes from the store via Liquid objects
 - Don't use raw hex colors in `theme.css` — use the custom properties
 - Don't add frameworks or build tools — this theme is plain Liquid + CSS + a tiny bit of JS
